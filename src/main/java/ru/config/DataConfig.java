@@ -32,6 +32,13 @@ public class DataConfig {
     private static final String PROP_HIBERNATE_SHOW_SQL = "db.hibernate.show_sql";
     private static final String PROP_ENTITYMANAGER_PACKAGES_TO_SCAN = "db.entitymanager.packages.to.scan";
     private static final String PROP_HIBERNATE_HBM2DDL_AUTO = "db.hibernate.hbm2ddl.auto";
+<<<<<<< HEAD
+=======
+    private static String PROP_DATABASE_DRIVER = "db.driver";
+    private static String PROP_DATABASE_PASSWORD = "db.password";
+    private static String PROP_DATABASE_URL = "db.url";
+    private static String PROP_DATABASE_USERNAME = "db.username";
+>>>>>>> 238eaa9b4a5eb79dffb05576187af1629d85a320
     public static int START;
     public static int STOP;
     public static int INTERVAL;
@@ -52,6 +59,7 @@ public class DataConfig {
         STOP        = Integer.parseInt(properties.getProperty("STOP"));
         LOGIN       = properties.getProperty("LOGIN");
         PASSWORD    = properties.getProperty("PASSWORD");
+<<<<<<< HEAD
         INTERVAL    = Integer.parseInt (properties.getProperty("INTERVAL"));
         INTERVAL_L  = Integer.parseInt (properties.getProperty("INTERVAL_L"));
         FIREFOX     = properties.getProperty("FIREFOX");
@@ -62,7 +70,21 @@ public class DataConfig {
         dataSource.setUrl(properties.getProperty("PROP_DATABASE_URL"));
         dataSource.setUsername(properties.getProperty("PROP_DATABASE_USERNAME"));
         dataSource.setPassword(properties.getProperty("PROP_DATABASE_PASSWORD"));
+=======
+        FIREFOX     = properties.getProperty("FIREFOX");
+        INTERVAL    = Integer.parseInt (properties.getProperty("INTERVAL"));
+        INTERVAL_L  = Integer.parseInt (properties.getProperty("INTERVAL_L"));
+        PROP_DATABASE_URL        = properties.getProperty("URL");
+        PROP_DATABASE_USERNAME       = properties.getProperty("PROP_DATABASE_USERNAME");
+        PROP_DATABASE_PASSWORD    = properties.getProperty("PROP_DATABASE_PASSWORD");
+        PROP_DATABASE_DRIVER     = properties.getProperty("PROP_DATABASE_DRIVER");
+>>>>>>> 238eaa9b4a5eb79dffb05576187af1629d85a320
 
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setDriverClassName( properties.getProperty(properties.getProperty("PROP_DATABASE_DRIVER")));
+        dataSource.setUrl(properties.getProperty("URL"));
+        dataSource.setUsername(properties.getProperty("PROP_DATABASE_USERNAME"));
+        dataSource.setPassword(properties.getProperty("PROP_DATABASE_PASSWORD"));
         return dataSource;
     }
 
