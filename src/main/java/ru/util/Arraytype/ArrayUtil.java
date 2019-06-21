@@ -5,7 +5,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 
 public class ArrayUtil {
-    public static <T> T deepCopy(Object objectArray) {
+    static <T> T deepCopy(Object objectArray) {
         Class arrayClass = objectArray.getClass();
 
         if (boolean[].class.equals(arrayClass)) {
@@ -38,7 +38,7 @@ public class ArrayUtil {
         }
     }
 
-    public static Object[] wrapArray(Object objectArray) {
+    static Object[] wrapArray(Object objectArray) {
         Class arrayClass = objectArray.getClass();
 
         if (boolean[].class.equals(arrayClass)) {
@@ -109,7 +109,7 @@ public class ArrayUtil {
         }
     }
 
-    public static <T> T unwrapArray(Object[] objectArray, Class<T> arrayClass) {
+    static <T> T unwrapArray(Object[] objectArray, Class<T> arrayClass) {
 
         if (boolean[].class.equals(arrayClass)) {
             boolean[] array = new boolean[objectArray.length];

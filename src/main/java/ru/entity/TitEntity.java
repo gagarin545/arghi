@@ -1,5 +1,7 @@
 package ru.entity;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 
 @Entity
@@ -7,11 +9,13 @@ import javax.persistence.*;
 public class TitEntity {
 
     @Id
-    @Column(name = "idtit", nullable = false)   // Код МЦТЭТ
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name= "increment", strategy= "increment")
+    @Column(name = "idtit", nullable = false, length = 2, columnDefinition = "serial")   // Код МЦТЭТ
     private long idtit;
 
     @Basic
-    @Column(name = "nametit", nullable = true, length = 10) // Наименование МЦТЭТ
+    @Column(name = "nametit", length = 12) // Наименование МЦТЭТ
     private String nametit;
 
     public long getIdTit() {        return idtit;    }

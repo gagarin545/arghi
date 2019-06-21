@@ -23,9 +23,9 @@ public class IncidentEntity {
     @Id
     @Basic
     @Column(name = "n_incident", nullable = false)    //№ инцидента
-    private int nincident;
-    public int getnIncident() {        return nincident;    }
-    public void setnIncident(int nincident) {        this.nincident = nincident;    }
+    private long nincident;
+    public long getnIncident() {        return nincident;    }
+    public void setnIncident(long nincident) {        this.nincident = nincident;    }
 
     @Basic
     @Column(name = "idcity")   // Код города
@@ -156,10 +156,10 @@ public class IncidentEntity {
     }
 
     @Basic
-    @Column(name = "ipaddress", columnDefinition = "CIDR")    // Ip адрес
-    private PgInet ipaddress;
-    public PgInet getIpAddress() {        return ipaddress;    }
-    public void setIpAddress(PgInet ipaddress) {        this.ipaddress = ipaddress;   }
+    @Column(name = "ipaddress", length = 15)    // Ip адрес
+    private String ipaddress;
+    public String getIpAddress() {        return ipaddress;    }
+    public void setIpAddress(String ipaddress) {        this.ipaddress = ipaddress;   }
 
     @Basic
     @Column(name = "slot")  // Слот
@@ -196,11 +196,18 @@ public class IncidentEntity {
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "iddevision", nullable = false)
     private DivisionEntity divisionEntity;
+    public DivisionEntity getDivisionEntity() {        return divisionEntity;    }
+    public void setDivisionEntity(DivisionEntity divisionEntity) {        this.divisionEntity = divisionEntity;    }
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "idtechnology", nullable = false)
     private TechnogyEntity technogyEntity ;
 
+
+    public TechnogyEntity getTechnogyEntity() {        return technogyEntity;    }
+    public void setTechnogyEntity(TechnogyEntity technogyEntity) {
+        this.technogyEntity = technogyEntity;
+    }
 
     public IncidentEntity() {}
 }

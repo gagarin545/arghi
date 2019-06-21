@@ -11,14 +11,14 @@ public class DivisionEntity {
     @Id
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name= "increment", strategy= "increment")
-    @Column(name = "idDevision", length = 6, nullable = false)
+    @Column(name = "idDevision", length = 6, nullable = false, columnDefinition = "serial")
     private long idDevision;
 
-    @Column(name = "namedivision")
+    @Column(name = "namedivision", length = 150)
     private String namedivision ;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinColumn(name = "idtit", nullable = true)
+    @JoinColumn(name = "idtit")
     private TitEntity titEntity ;
 
     public long getIdDevision() {        return idDevision;    }
