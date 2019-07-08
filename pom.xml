@@ -7,8 +7,22 @@
     <groupId>arg-hi</groupId>
     <artifactId>arg-hi</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>8</source>
+                    <target>8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
     <properties>
+        <spring.mvc>4.0.3.RELEASE</spring.mvc>
+        <javax.servlet>3.0.1</javax.servlet>
         <java.version>1.8</java.version>
         <json.version>1.1.1</json.version>
         <jsoup.version>1.12.1</jsoup.version>
@@ -16,86 +30,69 @@
         <selenium.api>3.141.59</selenium.api>
         <hb.manager>5.4.2.Final</hb.manager>
         <spring.mvc>5.1.3.RELEASE</spring.mvc>
-        <spring.data>2.1.4.RELEASE</spring.data>
+        <spring.data>2.1.6.RELEASE</spring.data>
         <spring.web>5.1.6.RELEASE</spring.web>
         <spring.test>3.2.4.RELEASE</spring.test>
-        <junit.version>4.11</junit.version>
+        <junit.version>4.13-beta-2</junit.version>
     </properties>
 
     <dependencies>
-
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>${selenium.api}</version>
         </dependency>
-
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-server -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-server</artifactId>
             <version>${selenium.api}</version>
         </dependency>
-
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-api -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-api</artifactId>
             <version>${selenium.api}</version>
         </dependency>
-
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-firefox-driver -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-firefox-driver</artifactId>
             <version>3.141.59</version>
         </dependency>
-
         <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>${postgesql.version}</version>
         </dependency>
-
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-entitymanager</artifactId>
-            <version>${hb.manager}</version>
-        </dependency>
-
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-jpa</artifactId>
             <version>${spring.data}</version>
         </dependency>
-
         <dependency>
             <groupId>com.googlecode.json-simple</groupId>
             <artifactId>json-simple</artifactId>
             <version>${json.version}</version>
         </dependency>
-
         <!-- https://mvnrepository.com/artifact/org.jsoup/jsoup -->
         <dependency>
             <groupId>org.jsoup</groupId>
             <artifactId>jsoup</artifactId>
             <version>${jsoup.version}</version>
         </dependency>
-
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-            <version>${spring.test}</version>
-            <scope>test</scope>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+            <version>2.1.4.RELEASE</version>
         </dependency>
 
         <dependency>
@@ -105,12 +102,23 @@
         </dependency>
 
         <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>${javax.servlet}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>5.1.8.RELEASE</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
             <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-entitymanager</artifactId>
-            <version>5.0.12.Final</version>
+            <artifactId>hibernate-core</artifactId>
+            <version>5.4.2.Final</version>
         </dependency>
 
     </dependencies>
-
-
 </project>
