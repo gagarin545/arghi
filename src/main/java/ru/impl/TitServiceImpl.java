@@ -8,7 +8,7 @@ import ru.service.TitService;
 
 import java.util.List;
 
-@Service
+@Service("jpaTit")
 public class TitServiceImpl implements TitService {
 
     @Autowired

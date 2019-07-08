@@ -13,26 +13,22 @@ import java.sql.Timestamp;
 @Table(name = "incident", schema = "public", catalog = "chel")
 @TypeDefs(value={@TypeDef(name="convertInet",typeClass= PgInetType.class)})
 public class IncidentEntity {
-
     @Basic
     @Column(name = "typeincident", nullable = false) //Тип инцидента
     private int typeincident;
     public int getTypeIncident() {        return typeincident;    }
     public void setTypeIncident(int typeincident) {        this.typeincident = typeincident;    }
-
     @Id
     @Basic
     @Column(name = "n_incident", nullable = false)    //№ инцидента
-    private long nincident;
-    public long getnIncident() {        return nincident;    }
-    public void setnIncident(long nincident) {        this.nincident = nincident;    }
-
+    private long n_incident;
+    public long getnIncident() {        return n_incident;    }
+    public void setnIncident(long n_incident) {        this.n_incident = n_incident;    }
     @Basic
     @Column(name = "idcity")   // Код города
     private int idcity;
     public int getIdCity() {        return idcity;    }
     public void setIdCity(int idcity) {        this.idcity = idcity;    }
-
     @Basic
     @Column(name = "service", nullable = false)   // Услуга
     private long service;
@@ -193,6 +189,12 @@ public class IncidentEntity {
     public Timestamp getTimeClose() {        return timeclose;    }
     public void setTimeClose(Timestamp timeclose) {        this.timeclose = timeclose;    }
 
+    @Basic
+    @Column(name = "worker")   //Работник
+    private Integer worker;
+    public Integer getWorker() {        return worker;    }
+    public void setWorker(Integer worker) {        this.worker = worker;    }
+
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "iddevision", nullable = false)
     private DivisionEntity divisionEntity;
@@ -202,8 +204,6 @@ public class IncidentEntity {
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "idtechnology", nullable = false)
     private TechnogyEntity technogyEntity ;
-
-
     public TechnogyEntity getTechnogyEntity() {        return technogyEntity;    }
     public void setTechnogyEntity(TechnogyEntity technogyEntity) {
         this.technogyEntity = technogyEntity;

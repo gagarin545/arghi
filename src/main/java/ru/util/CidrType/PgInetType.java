@@ -2,6 +2,7 @@ package ru.util.CidrType;
 
 import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SessionImplementor;
+import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.usertype.UserType;
 import org.springframework.util.ObjectUtils;
 
@@ -35,44 +36,33 @@ public class PgInetType implements UserType {
 
     @Override
     public int hashCode(Object x) throws HibernateException {
-        if (x != null)
-            return x.hashCode();
-        else
-            return 0;
+        return x != null ? x.hashCode():0;
     }
 
     @Override
-    public Object nullSafeGet(ResultSet resultSet, String[] strings, SessionImplementor sessionImplementor, Object o) throws HibernateException, SQLException {
+    public Object nullSafeGet(ResultSet resultSet, String[] strings, SharedSessionContractImplementor sharedSessionContractImplementor, Object o) throws HibernateException, SQLException {
         PgInet address=null;
         String ip=resultSet.getString(strings[0]);
-
         if(ip!=null)
             address=new PgInet(ip);
-
         return address;
     }
 
     @Override
-    public void nullSafeSet(PreparedStatement preparedStatement, Object o, int i, SessionImplementor sessionImplementor) throws HibernateException, SQLException {
+    public void nullSafeSet(PreparedStatement preparedStatement, Object o, int i, SharedSessionContractImplementor sharedSessionContractImplementor) throws HibernateException, SQLException {
         if(o==null)
             preparedStatement.setNull(i, Types.VARCHAR);
         else
             preparedStatement.setObject(i, getInet(o,  preparedStatement.getConnection()));
     }
 
-
     @Override
     public Object deepCopy(Object value) throws HibernateException {
-        if(value==null)
-            return null;
-        else{
             PgInet PgInetNew=new PgInet();
             PgInet PgInetOriginal=(PgInet)value;
-
             PgInetNew.setAddress(PgInetOriginal.getAddress());
 
-            return PgInetNew;
-        }
+            return value == null ? value:PgInetNew;
     }
 
     @Override

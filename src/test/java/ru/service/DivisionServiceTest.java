@@ -41,6 +41,6 @@ public class DivisionServiceTest {
 
       //  divisionService.addDivision(division);
 
-        divisionService.getAll().forEach(ss -> System.out.println( ss.getIdDevision() + ss.getMameDivison()));
+        divisionService.getAll().forEach(ss -> System.out.println( ss.getIdDevision() + ss.getNamedivision()));
     }
 }

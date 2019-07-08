@@ -20,5 +20,5 @@ public class TechnologyServiceImpl implements ru.service.TechnologyService {
     public List<TechnogyEntity> getAll() {        return technologyEntityRepository.findAll();    }
 
     @Override
-    public TechnogyEntity getById(String name) {        return technologyEntityRepository.findById(name);    }
+    public TechnogyEntity getById(String name) {        return technologyEntityRepository.getById( name);    }
 }

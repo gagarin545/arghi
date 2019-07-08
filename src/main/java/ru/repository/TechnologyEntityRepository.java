@@ -9,5 +9,5 @@ import ru.entity.TechnogyEntity;
 public interface TechnologyEntityRepository extends JpaRepository <TechnogyEntity, Long> {
 
     @Query("select b from TechnogyEntity b where b.nametechnology = :name")
-    TechnogyEntity findById(@Param("name") String nametechnology);
+    TechnogyEntity getById(@Param("name") String nametechnology);
 }

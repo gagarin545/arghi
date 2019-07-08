@@ -7,6 +7,6 @@ import java.util.List;
 public interface IncidentService {
 
     IncidentEntity addIncident(IncidentEntity incident);
-    IncidentEntity getByName( String name);
+    IncidentEntity getByNumer( long n_incident);
     List<IncidentEntity> getAll();
 }
