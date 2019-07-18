@@ -35,9 +35,9 @@ public class WorkersServiceTest {
     @Test
     public void testWorkersRead() throws Exception {
         WorkersEntity worker = new WorkersEntity();
-        worker.setName("Василий");
+        worker.setName("Грибачев Н.Е.");
         int [] i = { 351,35136};
-        worker.setIddivision(i);
+        //worker.setIddivision(i);
         workersService.addWorker(worker);
         workersService.getAll().forEach(ss -> System.out.println( Arrays.toString(ss.getIddivision()) + ss.getIdworker() + ss.getImei() + ss.getName() ));
     }

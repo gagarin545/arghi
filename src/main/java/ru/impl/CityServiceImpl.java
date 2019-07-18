@@ -15,4 +15,6 @@ public class CityServiceImpl implements CityService {
 
     @Override
     public List<CityEntity> getAll() {        return cityEntityRepository.findAll();    }
+    @Override
+    public CityEntity getByIdTit(Integer idcity) {        return cityEntityRepository.findByIdtit( idcity);    }
 }

@@ -26,8 +26,6 @@ import java.util.Properties;
 public class DataConfig {
     private static final String PROPERTIES_FILE = "properties";
     private static final String PROP_HIBERNATE_DIALECT = "db.hibernate.dialect";
-    private static final String PROP_DATABASE_URL = "db.hibernate.db.url";
-    private static final String PROP_DATABASE_DRIVER = "db.postgresql.driver";
     private static final String PROP_HIBERNATE_SHOW_SQL = "db.hibernate.show_sql";
     private static final String PROP_ENTITYMANAGER_PACKAGES_TO_SCAN = "db.entitymanager.packages.to.scan";
     private static final String PROP_HIBERNATE_HBM2DDL_AUTO = "db.hibernate.hbm2ddl.auto";

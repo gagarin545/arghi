@@ -1,26 +1,23 @@
 package ru.entity;
 
-import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
-import ru.util.CidrType.PgInet;
 import ru.util.CidrType.PgInetType;
-
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Objects;
 
 @Entity
 @Table(name = "incident", schema = "public", catalog = "chel")
-@TypeDefs(value={@TypeDef(name="convertInet",typeClass= PgInetType.class)})
 public class IncidentEntity {
     @Basic
     @Column(name = "typeincident", nullable = false) //Тип инцидента
-    private int typeincident;
+    private int typeincident = 1;
     public int getTypeIncident() {        return typeincident;    }
     public void setTypeIncident(int typeincident) {        this.typeincident = typeincident;    }
     @Id
     @Basic
-    @Column(name = "n_incident", nullable = false)    //№ инцидента
+    @Column(name = "n_incident", nullable = false, unique = true)    //№ инцидента
     private long n_incident;
     public long getnIncident() {        return n_incident;    }
     public void setnIncident(long n_incident) {        this.n_incident = n_incident;    }
@@ -73,7 +70,7 @@ public class IncidentEntity {
 
     @Basic
     @Column(name = "repet") // Повторность.
-    private int repet;
+    private int repet = 0;
     public int getRepet() {        return repet;    }
     public void setRepet(int repet) {        this.repet = repet;    }
 
@@ -90,7 +87,7 @@ public class IncidentEntity {
     public void setDecisionTime(Timestamp decisiontime) {        this.decisiontime = decisiontime; }
 
     @Basic
-    @Column(name = "nameclient", length = 80) // Клиент
+    @Column(name = "nameclient") // Клиент
     private String nameclient;
     public String getNameClient() {        return nameclient;    }
     public void setNameClient(String nameclient) {        this.nameclient = nameclient;    }
@@ -152,54 +149,22 @@ public class IncidentEntity {
     }
 
     @Basic
-    @Column(name = "ipaddress", length = 15)    // Ip адрес
-    private String ipaddress;
-    public String getIpAddress() {        return ipaddress;    }
-    public void setIpAddress(String ipaddress) {        this.ipaddress = ipaddress;   }
-
-    @Basic
-    @Column(name = "slot")  // Слот
-    private Integer slot;
-    public Integer getSlot() {
-        return slot;
-    }
-    public void setSlot(Integer slot) {
-        this.slot = slot;
-    }
-
-    @Basic
-    @Column(name = "port")  // Порт
-    private Integer port;
-    public Integer getPort() {
-        return port;
-    }
-    public void setPort(Integer port) {
-        this.port = port;
-    }
-
-    @Basic
-    @Column(name = "ont")   //Ont
-    private Integer ont;
-    public Integer getOnt() {        return ont;    }
-    public void setOnt(Integer ont) {        this.ont = ont;    }
-
-    @Basic
     @Column(name = "timeclose")    // Время закрытия
     private Timestamp timeclose;
     public Timestamp getTimeClose() {        return timeclose;    }
     public void setTimeClose(Timestamp timeclose) {        this.timeclose = timeclose;    }
 
-    @Basic
-    @Column(name = "worker")   //Работник
-    private Integer worker;
-    public Integer getWorker() {        return worker;    }
-    public void setWorker(Integer worker) {        this.worker = worker;    }
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinColumn(name = "idworker", nullable = false)
+    private WorkersEntity workersEntity;    //Работник
+    public WorkersEntity getWorkersEntity() {        return workersEntity;    }
+    public void setWorkersEntity(WorkersEntity workersEntity) {        this.workersEntity = workersEntity;    }
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "iddevision", nullable = false)
-    private DivisionEntity divisionEntity;
-    public DivisionEntity getDivisionEntity() {        return divisionEntity;    }
-    public void setDivisionEntity(DivisionEntity divisionEntity) {        this.divisionEntity = divisionEntity;    }
+    private DevisionEntity devisionEntity;
+    public DevisionEntity getDevisionEntity() {        return devisionEntity;    }
+    public void setDivisionEntity(DevisionEntity devisionEntity) {        this.devisionEntity = devisionEntity;    }
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "idtechnology", nullable = false)
@@ -210,4 +175,40 @@ public class IncidentEntity {
     }
 
     public IncidentEntity() {}
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        IncidentEntity that = (IncidentEntity) o;
+        return typeincident == that.typeincident &&
+                n_incident == that.n_incident &&
+                idcity == that.idcity &&
+                service == that.service &&
+                repet == that.repet &&
+                yield == that.yield &&
+                labelofservice == that.labelofservice &&
+                phone == that.phone &&
+                Objects.equals(declared, that.declared) &&
+                Objects.equals(controlterm, that.controlterm) &&
+                Objects.equals(controltermsla, that.controltermsla) &&
+                Objects.equals(controltermtask, that.controltermtask) &&
+                Objects.equals(createtime, that.createtime) &&
+                Objects.equals(clazz, that.clazz) &&
+                Objects.equals(decisiontime, that.decisiontime) &&
+                Objects.equals(nameclient, that.nameclient) &&
+                Objects.equals(address, that.address) &&
+                Objects.equals(room, that.room) &&
+                Objects.equals(techdata, that.techdata) &&
+                Objects.equals(comment, that.comment) &&
+                Objects.equals(timeclose, that.timeclose) &&
+                Objects.equals(workersEntity, that.workersEntity) &&
+                Objects.equals(devisionEntity, that.devisionEntity) &&
+                Objects.equals(technogyEntity, that.technogyEntity);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(typeincident, n_incident, idcity, service, declared, controlterm, controltermsla, controltermtask, createtime, clazz, repet, yield, decisiontime, nameclient, labelofservice, address, room, phone, techdata, comment, timeclose, workersEntity, devisionEntity, technogyEntity);
+    }
 }

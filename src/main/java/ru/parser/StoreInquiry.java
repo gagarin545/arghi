@@ -1,17 +1,19 @@
 package ru.parser;
 
 import org.openqa.selenium.WebDriver;
+import org.springframework.context.support.GenericXmlApplicationContext;
 import ru.config.DataConfig;
+import ru.entity.IncidentEntity;
+import ru.service.*;
 import ru.utils.InsertRecord;
-
-import java.io.IOException;
 import java.util.Calendar;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
-class StoreInquiry {
+public class StoreInquiry {
     static boolean Start = false;
-    void inquiryOrder() throws InterruptedException, ExecutionException, IOException {
+
+    public void exec(GenericXmlApplicationContext ctx) throws InterruptedException {
         String []str = {
                 "#global_fltr_f-j_idt484-",
                 "#global_fltr_f-j_idt502-",
@@ -21,6 +23,7 @@ class StoreInquiry {
                 "#global_fltr_f-j_idt521-",
                 "#global_fltr_f-j_idt529-",
                 "#global_fltr_f-j_idt530-",
+                "#global_fltr_f-j_idt532-",
                 "#global_fltr_f-j_idt534-",
                 "#global_fltr_f-j_idt541-"
         };
@@ -33,10 +36,10 @@ class StoreInquiry {
                 "#slcts-slct_acc-dsp_f-tree-0_5-txt_n",
                 "#slcts-slct_acc-dsp_f-tree-0_6-txt_n"
         };
-
-        String ss;
-
-
+        IncidentService incidentService = ctx.getBean("jpaIncident", IncidentService.class);
+        DevisionService devisionService = ctx.getBean("jpaDivision", DevisionService.class);
+        TechnologyService technologyService = ctx.getBean("jpaTechnology", TechnologyService.class);
+        WorkersService workersService = ctx.getBean("jpaWorker", WorkersService.class);
         while (!Start) {
             InsertRecord insert = new InsertRecord();
             InitWeb init = new InitWeb();
@@ -46,20 +49,20 @@ class StoreInquiry {
             OnInvisibleRead onInvisibleRead = new OnInvisibleRead();
             ShutDown shutDown = new ShutDown();
             while ( driver != null) {
-                //String s = "#slcts-slct_acc-dsp_f-tree-0-txt_n";
                 System.out.println(Calendar.getInstance().getTime());
                 selectRole.exec(driver, "7");
                 for( String s: Mct)
-                    insert.exec( onInvisibleRead.OnClick(driver, s));
+                    insert.exec( onInvisibleRead.OnClick(driver, s), devisionService, technologyService, workersService).forEach( incidentEntity -> incidentService.addIncident(incidentEntity));
                 for( String sss: str) selectDay.exec(driver, sss + "1");
-             //   for( String s: Mct)   #global_fltr_f-j_idt530-1-status_value > div:nth-child(2) > span:nth-child(1)
-           //         ss = onInvisibleRead.OnClick(driver, s);
+                for( String s: Mct)
+                    insert.exec( onInvisibleRead.OnClick(driver, s), devisionService, technologyService, workersService).forEach( incidentEntity -> incidentService.addIncident( incidentEntity));
                 selectRole.exec(driver, "8");
-       //         for( String s: Mct)
-          //          ss = onInvisibleRead.OnClick(driver, s);
+                for( String s: Mct)
+                    insert.exec( onInvisibleRead.OnClick(driver, s), devisionService, technologyService, workersService).forEach( incidentEntity -> incidentService.addIncident( incidentEntity));
+                    //System.out.println( "read->" + insert.exec( onInvisibleRead.OnClick(driver, s), devisionService, technologyService, workersService).size());
                 for( String sss: str) selectDay.exec(driver, sss + "0");
-     //           for( String s: Mct)
-           //         ss = onInvisibleRead.OnClick(driver, s);
+                for( String s: Mct)
+                    insert.exec( onInvisibleRead.OnClick(driver, s), devisionService, technologyService, workersService).forEach( incidentEntity -> incidentService.addIncident( incidentEntity));
 
                 Start = calendar_read.func(DataConfig.START, DataConfig.STOP);
                 System.out.println("Состояние=" + Start + " Пауза=" + DataConfig.INTERVAL);

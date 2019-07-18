@@ -37,7 +37,8 @@ public class UpdateTimeServiceTest {
     public void UpdateTimeRead(){
         UpdateTimeEntity updatetime = new UpdateTimeEntity();
 
-        // System.out.println(timeupdate);
+        System.out.println(Calendar.getInstance().getTimeInMillis());
+       // updatetime.setTimeUpdate( new Timestamp(Calendar.getInstance().getTimeInMillis()));
         updatetime.setTimeUpdate( new Timestamp(Calendar.getInstance().getTimeInMillis()));
         updatetime.setId(1);
         updateTimeService.updateTime( updatetime);

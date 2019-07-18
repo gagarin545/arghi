@@ -13,12 +13,11 @@ import javax.persistence.*;
 @TypeDefs( @TypeDef(name="int-array", typeClass = IntArrayType.class))
 public class WorkersEntity {
     @Id
-    @GeneratedValue(generator = "increment")
-    @GenericGenerator(name= "increment", strategy= "increment")
-    @Column(name = "idworker", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idworker", nullable = false, columnDefinition = "serial")
     private int idworker;
     @Basic
-    @Column(name = "name", nullable = false, length = 50)
+    @Column(name = "name", nullable = false, length = 100)
     private String name;
     @Basic
     @Column(name = "imei", nullable = true, length = 30)
@@ -26,7 +25,6 @@ public class WorkersEntity {
     @Type( type = "int-array")
     @Column ( name = "iddivision" , columnDefinition = "integer[]")
     private int[] iddivision;
-
     public WorkersEntity() {}
     public int getIdworker() {        return idworker;    }
     public void setIdworker(int idworker) {        this.idworker = idworker;    }

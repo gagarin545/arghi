@@ -8,6 +8,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import ru.config.TestDataBaseConfig;
+import ru.entity.TechnogyEntity;
 
 import javax.annotation.Resource;
 import javax.persistence.EntityManager;
@@ -33,6 +34,10 @@ public class TecnologyServiceTest {
 
     @Test
     public void testTechnologyRead() throws Exception {
+
+        TechnogyEntity technogyEntity = new TechnogyEntity();
+        technogyEntity.setMameTechnology("ADSL2+");
+        technologyService.addTechnology( technogyEntity);
         technologyService.getAll().forEach(ss -> System.out.println(ss.getIdTechnology() + ss.getMameTechnology()));
     }
 }

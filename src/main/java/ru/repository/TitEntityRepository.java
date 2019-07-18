@@ -6,9 +6,6 @@ import org.springframework.data.repository.query.Param;
 import ru.entity.TitEntity;
 
 public interface TitEntityRepository extends JpaRepository <TitEntity, Long> {
-
-   @Query("select b from TitEntity b where b.nametit = :nametit")
+    @Query("select b from TitEntity b where b.nametit = :nametit")
     TitEntity findByName(@Param("nametit") String nametit);
-
-
 }

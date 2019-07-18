@@ -7,7 +7,7 @@ import ru.repository.TechnologyEntityRepository;
 
 import java.util.List;
 
-@Service
+@Service("jpaTechnology")
 public class TechnologyServiceImpl implements ru.service.TechnologyService {
 
     @Autowired
@@ -15,10 +15,8 @@ public class TechnologyServiceImpl implements ru.service.TechnologyService {
 
     @Override
     public TechnogyEntity addTechnology(TechnogyEntity technogyEntity) {        return technologyEntityRepository.saveAndFlush(technogyEntity);    }
-
     @Override
     public List<TechnogyEntity> getAll() {        return technologyEntityRepository.findAll();    }
-
     @Override
     public TechnogyEntity getById(String name) {        return technologyEntityRepository.getById( name);    }
 }

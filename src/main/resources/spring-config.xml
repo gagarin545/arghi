@@ -9,18 +9,12 @@
 
        <!--@Transaction annotation support -->
        <tx:annotation-driven transaction-manager="transactionManager"/>
-
        <!--Scanning components in base-package (look for annotations) -->
        <context:component-scan base-package="ru"/>
-
        <!--Activates various annotations to be detected in bean classes: Spring's @Required and @Autowired and so on-->
        <context:annotation-config/>
-
        <!--Обеспечивает работу с транзакциями в Spring -->
-
-       <!-- Datasource. Источник данных - база MySQL -->
-
-
+       <!-- Datasource. Источник данных - база Postgresql -->
        <!-- EntityManagerFactory -->
        <bean id="emf" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
               <property name="dataSource" ref="dataSource" />

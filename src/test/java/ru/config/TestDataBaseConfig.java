@@ -22,7 +22,6 @@ public class TestDataBaseConfig {
     private static final String PROPERTY_NAME_DATABASE_URL = "jdbc:postgresql://192.168.100.4:5432/chel";
     private static final String PROPERTY_NAME_DATABASE_USERNAME = "ura";
     private static final String PROPERTY_NAME_DATABASE_PASSWORD = "Kukish54";
-
     private static final String PROPERTY_NAME_HIBERNATE_DIALECT = "org.hibernate.dialect.PostgreSQLDialect";
     private static final String PROPERTY_NAME_HIBERNATE_SHOW_SQL = "true";
     private static final String PROPERTY_NAME_ENTITYMANAGER_PACKAGES_TO_SCAN = "ru.entity";
@@ -52,7 +51,6 @@ public class TestDataBaseConfig {
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-
         dataSource.setDriverClassName(PROPERTY_NAME_DATABASE_DRIVER);
         dataSource.setUrl(PROPERTY_NAME_DATABASE_URL);
         dataSource.setUsername(PROPERTY_NAME_DATABASE_USERNAME);
