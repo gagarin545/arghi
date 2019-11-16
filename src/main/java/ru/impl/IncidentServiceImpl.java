@@ -14,7 +14,9 @@ public class IncidentServiceImpl implements IncidentService {
     private IncidentEntityRepository incidentEntityRepository;
 
     @Override
-    public IncidentEntity addIncident (IncidentEntity incident) {        return incidentEntityRepository.saveAndFlush( incident);    }
+    public void addIncident (IncidentEntity incident) {
+        incidentEntityRepository.saveAndFlush(incident);
+    }
     @Override
     public IncidentEntity getByNumer(long n_incident) {         return incidentEntityRepository.findByNumer(n_incident);    }
     @Override

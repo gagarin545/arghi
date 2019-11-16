@@ -8,7 +8,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import ru.config.TestDataBaseConfig;
-import ru.entity.DevisionEntity;
+import ru.entity.DivisionEntity;
 import ru.entity.IncidentEntity;
 import ru.entity.TechnogyEntity;
 
@@ -32,7 +32,7 @@ public class IncidentServiceTest {
     private IncidentService incidentService;
 
     @Resource
-    private DevisionService devisionService;
+    private DivisionService devisionService;
 
     @Resource
     private TechnologyService technologyService;
@@ -50,12 +50,13 @@ public class IncidentServiceTest {
 
         IncidentEntity incidentEntity =incidentService.getByNumer(8759914);
 
-        DevisionEntity division = devisionService.getByName("ШПД г.Златоуст");
+        DivisionEntity division = devisionService.getByName("ШПД г.Златоуст");
         TechnogyEntity tech = technologyService.getById("PSTN");
        // incident.setAddress("adress");
         incident.setnIncident(Long.parseLong("8759914"));
    //     incident.setClazz("claz");
         //incident.setComment("Засада");
+
 
         incident.setService(77740123668L);
         incident.setTypeIncident(1);

@@ -8,7 +8,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import ru.config.TestDataBaseConfig;
-import ru.entity.DevisionEntity;
+import ru.entity.DivisionEntity;
 import ru.entity.TitEntity;
 
 import javax.annotation.Resource;
@@ -27,7 +27,7 @@ public class DivisionServiceTest {
     private EntityManager em;
 
     @Resource
-    private DevisionService devisionService;
+    private DivisionService devisionService;
 
     @Resource
     private TitService titService;
@@ -40,16 +40,16 @@ public class DivisionServiceTest {
     @Test
     public void testDivisionRead() throws Exception {
 
-        DevisionEntity division = new DevisionEntity();
+        DivisionEntity division = new DivisionEntity();
 
         TitEntity titEntity = new TitEntity();
         titEntity = titService.getByName("ЗМЦТЭТ");
-        division.setNamedevision("ШПД г.Златоуст");
+        division.setNameDivision("ШПД г.Златоуст");
         division.setIdcity(3513);
   //      division.setTitEntity( titService.getByName("ЗМЦТЭТ"));
     //    division.setIdDevision(2);
 //        devisionService.addDivision(division);
 
-        devisionService.getAll().forEach(ss -> System.out.println( ss.getIdDevision() + ss.getNamedevision()));
+        devisionService.getAll().forEach(ss -> System.out.println( ss.getIdDivision() + ss.getNameDivision()));
     }
 }

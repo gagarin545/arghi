@@ -3,13 +3,15 @@ package ru.parser;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import ru.config.DataConfig;
+import ru.utils.MyException;
+
 import java.util.concurrent.TimeUnit;
 
 import static java.lang.System.out;
 
 class InitWeb extends Metod {
     private WebDriver driver;
-    WebDriver exec() throws InterruptedException {
+    WebDriver exec() throws InterruptedException, MyException {
         int interval = 3;
         String url_name = "http://argusweb.ur.rt.ru:8080/argus";
         System.setProperty(FirefoxDriver.SystemProperty.DRIVER_USE_MARIONETTE,"true");

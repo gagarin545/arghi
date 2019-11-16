@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface IncidentService {
 
-    IncidentEntity addIncident(IncidentEntity incident);
+    void addIncident(IncidentEntity incident);
     IncidentEntity getByNumer( long n_incident);
     List<IncidentEntity> getAll();
 }

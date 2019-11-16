@@ -6,10 +6,10 @@ dbpassword=Kukish54
 START=6
 STOP=21
 INTERVAL=7
-INTERVAL_L=20
-FIREFOX=/usr/bin/geckodriver
+INTERVAL_L=30
+FIREFOX=/home/ura/usr/geckodriver
 LOGIN=ch_gagarin
-PASSWORD=Pfcflf59=
+PASSWORD=Pfcflf66+
 MC-old=#slcts-slct_acc-dsp_f-tree-0_1_0-txt_n
 ZLT=#slcts-slct_acc-dsp_f-tree-0_0-txt_n
 KOP=#slcts-slct_acc-dsp_f-tree-0_1-txt_n

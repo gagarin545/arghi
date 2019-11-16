@@ -1,8 +1,5 @@
 package ru.entity;
 
-import org.hibernate.annotations.TypeDef;
-import org.hibernate.annotations.TypeDefs;
-import ru.util.CidrType.PgInetType;
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;
@@ -31,18 +28,16 @@ public class IncidentEntity {
     private long service;
     public long getService() {        return service;    }
     public void setService(long service) {        this.service = service;    }
-
     @Basic
     @Column(name = "declared", columnDefinition = "text")  // Заявлено
     private String declared;
     public String getDeclared() { return declared;    }
     public void setDeclared(String declared) {        this.declared = declared;    }
-
     @Basic
-    @Column(name = "controlterm", length = 40)  // Контрольное время
-    private String controlterm;
-    public String getControlTerm() {        return controlterm;    }
-    public void setControlTerm(String controlterm) {        this.controlterm = controlterm;    }
+    @Column(name = "controlterm")  // Контрольное время
+    private Timestamp controlterm;
+    public Timestamp getControlTerm() {        return controlterm;    }
+    public void setControlTerm(Timestamp controlterm) {        this.controlterm = controlterm;    }
 
     @Basic
     @Column(name = "controltermsla", length = 40)  // Контрольное время Sla
@@ -61,9 +56,8 @@ public class IncidentEntity {
     private Timestamp createtime;
     public Timestamp getCreateTime() {        return createtime;    }
     public void setCreateTime(Timestamp createtime) {        this.createtime = createtime;    }
-
     @Basic
-    @Column(name = "clazz", nullable = false, length = 20) // Кл.
+    @Column(name = "clazz", nullable = false) // Кл.
     private String clazz;
     public String getClazz() {        return clazz; }
     public void setClazz(String clazz) {        this.clazz = clazz;    }
@@ -85,19 +79,16 @@ public class IncidentEntity {
     private Timestamp decisiontime;
     public Timestamp getDecisionTime() {        return decisiontime; }
     public void setDecisionTime(Timestamp decisiontime) {        this.decisiontime = decisiontime; }
-
     @Basic
     @Column(name = "nameclient") // Клиент
     private String nameclient;
     public String getNameClient() {        return nameclient;    }
     public void setNameClient(String nameclient) {        this.nameclient = nameclient;    }
-
     @Basic
     @Column(name = "labelofservice") // Уровень обслуживания
     private int labelofservice;
     public int getLabelOfService() {        return labelofservice;    }
     public void setLabelOfService(int labelofservice) {        this.labelofservice = labelofservice;    }
-
     @Basic
     @Column(name = "address", length = 100)   //Адрес
     private String address;
@@ -161,10 +152,10 @@ public class IncidentEntity {
     public void setWorkersEntity(WorkersEntity workersEntity) {        this.workersEntity = workersEntity;    }
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinColumn(name = "iddevision", nullable = false)
-    private DevisionEntity devisionEntity;
-    public DevisionEntity getDevisionEntity() {        return devisionEntity;    }
-    public void setDivisionEntity(DevisionEntity devisionEntity) {        this.devisionEntity = devisionEntity;    }
+    @JoinColumn(name = "iddivision", nullable = false)
+    private DivisionEntity divisionEntity;
+    public DivisionEntity getDivisionEntity() {        return divisionEntity;    }
+    public void setDivisionEntity(DivisionEntity divisionEntity) {        this.divisionEntity = divisionEntity;    }
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "idtechnology", nullable = false)
@@ -203,12 +194,12 @@ public class IncidentEntity {
                 Objects.equals(comment, that.comment) &&
                 Objects.equals(timeclose, that.timeclose) &&
                 Objects.equals(workersEntity, that.workersEntity) &&
-                Objects.equals(devisionEntity, that.devisionEntity) &&
+                Objects.equals(divisionEntity, that.divisionEntity) &&
                 Objects.equals(technogyEntity, that.technogyEntity);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(typeincident, n_incident, idcity, service, declared, controlterm, controltermsla, controltermtask, createtime, clazz, repet, yield, decisiontime, nameclient, labelofservice, address, room, phone, techdata, comment, timeclose, workersEntity, devisionEntity, technogyEntity);
+        return Objects.hash(typeincident, n_incident, idcity, service, declared, controlterm, controltermsla, controltermtask, createtime, clazz, repet, yield, decisiontime, nameclient, labelofservice, address, room, phone, techdata, comment, timeclose, workersEntity, divisionEntity, technogyEntity);
     }
 }
