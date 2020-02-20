@@ -6,7 +6,7 @@
     <session-factory>
         <property name="connection.url">jdbc:postgresql://192.168.100.4:5432/chel</property>
         <property name="connection.driver_class">org.postgresql.Driver</property>
-        <mapping class="ru.entity.ResultEntity"/>
+        <mapping class="ru.config.DataConfig"/>
         <!-- <property name="connection.username"/> -->
         <!-- <property name="connection.password"/> -->
 

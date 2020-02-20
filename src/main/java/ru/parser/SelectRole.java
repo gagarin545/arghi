@@ -15,6 +15,7 @@ class SelectRole extends Metod {
             TimeUnit.SECONDS.sleep(DataConfig.INTERVAL);
         } catch (NoSuchElementException | InterruptedException | MyException e) {
             StoreInquiry.Start = false;
+
             //e.printStackTrace();
         }
     }

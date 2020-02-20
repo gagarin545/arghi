@@ -23,6 +23,8 @@ public class StoreInquiry {
                 "#global_fltr_f-j_idt499-",
                 "#global_fltr_f-j_idt500-",
                 "#global_fltr_f-j_idt502-",
+                "#global_fltr_f-j_idt503-",
+                "#global_fltr_f-j_idt504-",
                 "#global_fltr_f-j_idt505-",
                 "#global_fltr_f-j_idt513-",
                 "#global_fltr_f-j_idt514-",

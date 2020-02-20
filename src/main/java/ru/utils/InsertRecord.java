@@ -31,17 +31,18 @@ public class InsertRecord {
                 TechnogyEntity technogyEntity = new TechnogyEntity();
                 WorkersEntity workersEntity = new WorkersEntity();
                 StringBuilder CommentAll = new StringBuilder();
-                out.println(target.html());
+                out.print(target.html());
                 if(target.html().startsWith("Л")) {
-                    if( i0.getElementsByAttributeValueContaining("id","clmns-29").html().equals("нет"))
-                        TechData = i0.getElementsByAttributeValueContaining("id","clmns-30").html();
+                    if( i0.getElementsByAttributeValueContaining("id","clmns-30").html().equals("нет"))
+                        TechData = i0.getElementsByAttributeValueContaining("id","clmns-31").html();
                     else
-                        TechData = i0.getElementsByAttributeValueContaining("id","clmns-29").html();
+                        TechData = i0.getElementsByAttributeValueContaining("id","clmns-30").html();
                     incidentEntity.setTypeIncident(0);
                 }
                 else
-                    TechData = i0.getElementsByAttributeValueContaining("id","clmns-28").html();
+                    TechData = i0.getElementsByAttributeValueContaining("id","clmns-29").html();
                 incidentEntity.setnIncident(Long.parseLong(target.html().split("-\u200B")[1])); // номер заявки
+              //  out.println( ">" + TechData);
                 incidentEntity.setTechData(TechData);   // Тех данные
                 Elements span = i0.select("span");
                 for(int count = 1 ; count < span.size() ; count++ ) {
@@ -53,11 +54,22 @@ public class InsertRecord {
                                 incidentEntity.setService(Long.parseLong( span.get(count).html().split("ВИДЕОНАБЛЮДЕНИЕ")[0] + span.get(count).html().split("ВИДЕОНАБЛЮДЕНИЕ")[1].substring(2)));
                                 continue;
                             }
+                            if(span.get(count).html().toUpperCase().contains("УМНЫЙ ДОМОФОН ФЛ")) {
+                                incidentEntity.setIdCity(Integer.parseInt(span.get(count).html().split("УМНЫЙ ДОМОФОН ФЛ")[0]));
+                                incidentEntity.setService(Long.parseLong( span.get(count).html().split("УМНЫЙ ДОМОФОН ФЛ")[0] + span.get(count).html().split("УМНЫЙ ДОМОФОН ФЛ")[1].substring(2)));
+                                continue;
+                            }
                             //out.println(span.get(count).html());
                             if(span.get(count).html().toUpperCase().contains("ВИДЕОНАБЛ")) {
                                 out.println((span.get(count).html()));
                                 incidentEntity.setIdCity(Integer.parseInt(span.get(count).html().split("ВИДЕОНАБЛ")[0]));
                                 incidentEntity.setService(Long.parseLong( span.get(count).html().split("ВИДЕОНАБЛ")[0] + span.get(count).html().split("ВИДЕОНАБЛ")[1].substring(2)));
+                                continue;
+                            }
+                            if(span.get(count).html().toUpperCase().contains("МОБ.КАНАЛ")) {
+                                out.println((span.get(count).html()));
+                                incidentEntity.setIdCity(Integer.parseInt(span.get(count).html().split("МОБ.КАНАЛ")[0]));
+                                incidentEntity.setService(Long.parseLong( span.get(count).html().split("МОБ.КАНАЛ")[0] + span.get(count).html().split("МОБ.КАНАЛ")[1].substring(2)));
                                 continue;
                             }
                             if(span.get(count).html().toUpperCase().contains("ВИДЕОМКД")) {
@@ -75,6 +87,12 @@ public class InsertRecord {
                                 incidentEntity.setService(Long.parseLong( "77" + span.get(count).html().split("СПД")[1]));
                                 continue;
                             }
+                            if( span.get(count).html().toUpperCase().contains("ДОМОФОН")) {
+                                out.print(span.get(count).html().toUpperCase());
+                                incidentEntity.setIdCity(Integer.parseInt(span.get(count).html().split("ДОМОФОН")[0]));
+                                incidentEntity.setService(Long.parseLong(  span.get(count).html().split("ДОМОФОН")[1]));
+                                continue;
+                            }
                             if( span.get(count).html().toUpperCase().contains("IP-TV SMART TUBE")) {
                                 incidentEntity.setIdCity(Integer.parseInt(span.get(count).html().split("IP-TV SMART TUBE")[0]));
                                 incidentEntity.setService(Long.parseLong( "77" + span.get(count).html().split("IP-TV SMART TUBE")[1]));
@@ -85,6 +103,7 @@ public class InsertRecord {
                                 incidentEntity.setService(Long.parseLong( span.get(count).html().split("ПП")[1]));
                                 continue;
                             }
+
                             incidentEntity.setIdCity(Integer.parseInt(span.get(count).html().substring(0, 5)));
                             incidentEntity.setService(Integer.parseInt(span.get(count).html().substring( 5)));
                             continue;
@@ -120,14 +139,14 @@ public class InsertRecord {
                         case 5:
                         case 6:
                             if (span.get(count).childNodeSize() > 1) {
-                           //     out.println(count + " termSla=" + span.get(count).childNode(0) + span.get(count + 1).html().replace("&nbsp;", ""));
+                            //    out.println(count + " termSla=" + span.get(count).childNode(0) + span.get(count + 1).html().replace("&nbsp;", ""));
                                 incidentEntity.setControlTermSla(span.get(count).childNode(0) + span.get(count++ + 1).html().replace("&nbsp;", ""));
                              }
                             continue;
                         case 7:
 
                             if (span.get(count).childNodeSize() > 1) {
-                            //    out.println(count + " termtask=" + span.get(count).childNode(0) + span.get(count + 1).html().replace("&nbsp;", ""));
+                               // out.println(count + " termtask=" + span.get(count).childNode(0) + span.get(count + 1).html().replace("&nbsp;", ""));
                                 incidentEntity.setControlTermTask(span.get(count).childNode(0) + span.get(count++ + 1).html().replace("&nbsp;", ""));
                               }
                             continue;
@@ -154,7 +173,7 @@ public class InsertRecord {
                                 divisionService.addDivision( divisionEntity);
                             }
                             incidentEntity.setDivisionEntity( divisionService.getByName(span.get(count).html()));
-                            //out.println(n + " отдел->" + span.get(count).html());
+                           // out.println(n + " отдел->" + span.get(count).html());
                             continue;
                         case 18:
                             while (count < span.size())
@@ -162,30 +181,31 @@ public class InsertRecord {
                                     break;
                                 else
                                     count++;
-                            out.println(n + " раб ->"  +  span.get(count -1).html()); //workers
-                            if(workersService.getByName(span.get(count -1).html()) == null) {
-                                workersEntity.setName( span.get(count -1).html());
+                          //  out.println(n + " раб ->"  +  span.get(count -2).html()); //workers
+                            if(workersService.getByName(span.get(count -2).html()) == null) {
+                                workersEntity.setName( span.get(count -2).html());
                                 workersService.addWorker( workersEntity);
                             }
-                            incidentEntity.setWorkersEntity( workersService.getByName(span.get(count -1).html()));
-                            //System.out.println(n + "->" + span.get(count).html());
+                            incidentEntity.setWorkersEntity( workersService.getByName(span.get(count -2).html()));
+                           // System.out.println(n + "->" + span.get(count).html());
                             vizit = span.get(count).html().replace('.','-').split(" ");
+                        //    out.print("Vizit " + vizit[4].split("-")[2] + '-' + vizit[4].split("-")[1] + '-' + vizit[4].split("-")[0] + ' ' + vizit[3] + ":00");
                             incidentEntity.setDecisionTime(Timestamp.valueOf(vizit[4].split("-")[2] + '-' + vizit[4].split("-")[1] + '-' + vizit[4].split("-")[0] + ' ' + vizit[3] + ":00"));
                              continue;
                         case 20:
-                            //out.println(n + " имя ->"  +  span.get(count).html());
+                          //  out.println(n + " имя ->"  +  span.get(count).html());
                             incidentEntity.setNameClient( span.get(count).html());      // Имя клиента
                             continue;
                         case 21:
-                           // out.println(n + " адрес ->"  +  span.get(count).html());
+                         //   out.println(n + " адрес ->"  +  span.get(count).html());
                             incidentEntity.setAddress( span.get(count).html());         // Адрес
                             continue;
                         case 22:
                             incidentEntity.setRoom( span.get(count).html());           // номер помещения
-                           // out.println(n + " пом. ->"  +  span.get(count).html());
+                         //   out.println(n + " пом. ->"  +  span.get(count).html());
                             continue;
                         case 23:
-                            //out.println(n + " тел ->"  +  span.get(count).html());
+                         //   out.println(n + " тел ->"  +  span.get(count).html());
                              try {
                                  Long.parseLong(span.get(count).html());
                             } catch (Exception e) { continue;   }
@@ -209,10 +229,11 @@ public class InsertRecord {
                 }
                 incidentEntity.setTimeClose( new Timestamp(Calendar.getInstance().getTimeInMillis()));
                 incidentEntity.setComment(String.valueOf(CommentAll));
-                incidentall.add(incidentEntity);
+                out.println( " -> " + incidentEntity.getAddress());
+                        incidentall.add(incidentEntity);
             }
         }
-        out.println( "Записей обработано -> " + incidentall.size() + ' ' + Calendar.getInstance().getTime());
+            out.println(" Записей обработано -> " + incidentall.size() + ' ' + Calendar.getInstance().getTime());
         return incidentall;
     }
 }

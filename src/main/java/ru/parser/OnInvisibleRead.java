@@ -19,10 +19,10 @@ class OnInvisibleRead {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        } catch ( NoSuchElementException e) {
+        } catch ( WebDriverException e) {
             System.out.println("Error -> OnVisible");
             StoreInquiry.Start = false;
-            throw new MyException("reboot", false);
+            throw new MyException(">>>>reboot", false);
         }
         return driver.getPageSource();
     }

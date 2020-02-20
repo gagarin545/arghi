@@ -12,7 +12,7 @@ abstract class Metod {
             (new WebDriverWait(dr, tm, 500)).withMessage("-> Элемент не найден.")
                     .until(ExpectedConditions.visibilityOf(element));
             dr.findElement(By.cssSelector(str)).click();
-        }catch (NoSuchElementException | TimeoutException | ElementNotInteractableException el) {
+        }catch (WebDriverException el) {
             System.out.println("Элемент не найден. Состояние start = " + StoreInquiry.Start );
             throw new MyException("reboot", false);
         }
