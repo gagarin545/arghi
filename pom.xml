@@ -33,7 +33,7 @@
         <javax.servlet>3.0.1</javax.servlet>
         <java.version>1.8</java.version>
         <json.version>1.1.1</json.version>
-        <jsoup.version>1.12.1</jsoup.version>
+        <jsoup.version>1.15.3</jsoup.version>
         <postgesql.version>42.2.5</postgesql.version>
         <selenium.api>3.141.59</selenium.api>
         <hb.manager>5.4.2.Final</hb.manager>
